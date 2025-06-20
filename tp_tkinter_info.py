@@ -147,7 +147,32 @@ def mostrar_empanadas():
     ventana = tk.Toplevel()
     ventana.title("Empanadas")
     ventana.geometry("500x600")
-    ventana.configure(bg="#d1ecf3")
+    ventana.configure(bg="#FA8072")  
+
+    tk.Label(
+        ventana,
+        text="EMPANADAS",
+        font=("Helvetica", 18, "bold"),
+        bg="#FFA500",  
+        fg="black"
+    ).pack(fill="x", pady=10)
+
+    productos_empanadas = [
+        ("Jamon y Queso", 8000),
+        ("Pollo", 7500),
+        ("Carne picada", 7000),
+        ("Carne cortada a cuchillo", 7500),
+        ("Verduras", 6500),
+        ("Humitas", 7500)
+    ]
+
+    for nombre, precio in productos_empanadas:
+        frame = tk.Frame(ventana, bg="#FA8072")
+        frame.pack(anchor="w", padx=20, pady=5, fill="x")
+
+        tk.Label(frame, text=f"{nombre} - ${precio} c/d", font=("Arial", 12), bg="#FA8072").pack(side="left")
+        tk.Button(frame, text="Agregar", command=lambda n=nombre, p=precio: agregar_al_pedido(n, p)).pack(side="right")
+
 
 tk.Button(ventana_principal, 
         text="EMPANADAS", 
