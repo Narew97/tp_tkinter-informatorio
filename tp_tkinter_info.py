@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk 
+
 
 
 ventana_principal = tk.Tk()
@@ -188,14 +190,27 @@ def mostrar_postres():
         ("Vigilante", 8000),
         ("Flan", 2500),
         ("Torta Chaja", 12000),
-        ("Alfajores de Maizena", 8000)
+        ("Alfajores de Maicena", 8000)
     ]
-
-    for nombre, precio in lista_postres:
-        
-
+    imagenes_postres = {
+        "Lemon Pie":"lemon pie.jpg",
+        "Vigilante":"vigilante.jpg",
+        "Flan":"flan.jpeg",
+        "Torta Chaja":"torta chaja.jpeg",
+        "Alfajores de Maicena":"Alfajores de Maicena.jpeg"
+    }
+    for nombre, precio in lista_postres:     
         frame = tk.Frame(ventana, bg="#d1ecf3")
-        frame.pack(anchor="w", padx=20, pady=5, fill="x")
+        frame.pack(anchor="w", padx=0, pady=0, fill="x")
+        
+        rut_img= imagenes_postres.get(nombre,)
+        img = Image.open(rut_img)
+        img = img.resize((60, 60))
+        foto = ImageTk.PhotoImage(img)
+        
+        img_label = tk.Label(frame, image=foto, bg="#fce4b2")
+        img_label.image = foto 
+        img_label.pack(side="left", padx=0, pady=0)
 
         tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 12), bg="#d1ecf3").pack(side="left")
         tk.Button(frame, text="Agregar", 
