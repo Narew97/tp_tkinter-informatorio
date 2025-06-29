@@ -1,6 +1,7 @@
+
 import tkinter as tk
 from tkinter import messagebox
-
+from PIL import Image, ImageTk
 
 ventana_principal = tk.Tk()
 ventana_principal.title("Menú Principal")
@@ -25,50 +26,106 @@ def agregar_al_pedido(producto, precio):
 def mostrar_carnes():
     ventana = tk.Toplevel()
     ventana.title("CARNES")
-    ventana.geometry("500x600")
+    ventana.geometry("500x800")
     ventana.configure(bg="#fce4b2")
+    
+
+    imagen = Image.open("fondomcarnes.jpg")
+    imagen = imagen.resize((800, 1200))
+    label_tk = ImageTk.PhotoImage(imagen)
+    label = tk.Label(ventana, image=label_tk)
+    label.image = label_tk
+    label.place(x=0, y=0, relwidth=1, relheight=1)
     
     tk.Label(ventana, text="CARNES", 
             font=("Helvetica", 18, "bold"), 
             bg="#fcd17e"
-            ).pack(fill="x", pady=10)
+            ).pack(fill="x", pady=1)
     
     tk.Label(ventana, text="VACUNO", font=("Helvetica", 16, "bold"), bg="#cf81a8").pack(fill="x", pady=10)
-    productos_vacuno = [("costilla", 5500), ("lomo", 7800), ("entraña", 6000),]  
+    productos_vacuno = [("costilla", 5500), ("entraña", 6000),]  
     
+    imagenes_vacuno = {
+        "costilla": "costilla_vacun.jpg",
+        "lomo": "lomodevaca.jpg",
+        "entraña": "entrañ.jpg",
+    }
     for nombre, precio in productos_vacuno:
-        frame = tk.Frame(ventana, bg="#fce4b2")
-        frame.pack(anchor="w", padx=20, pady=5, fill="x")
+        frame = tk.Frame(ventana, bg="#fff9ed")
+        frame.pack(anchor="w", padx=0, pady=0, fill="x")
 
-        tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 12), bg="#fce4b2").pack(side="left")
+        rut_img= imagenes_vacuno.get(nombre,)
+        img = Image.open(rut_img)
+        img = img.resize((60, 60))
+        foto = ImageTk.PhotoImage(img)
+    
+        img_label = tk.Label(frame, image=foto, bg="#fce4b2")
+        img_label.image = foto 
+        img_label.pack(side="left", padx=0, pady=0)
+        
+        
+
+        tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 12), bg="#fff9ed").pack(side="left")
         tk.Button(frame, text="Agregar", 
                 command=lambda n=nombre, 
                 p=precio: agregar_al_pedido(n, p)
                 ).pack(side="right")
 
     
-    tk.Label(ventana, text="CERDO", font=("Helvetica", 16, "bold"), bg="#cf81a8").pack(fill="x", pady=15)
-    productos_cerdo = [("costilla", 4500), ("lomo", 6800)]
+    tk.Label(ventana, text="CERDO", font=("Helvetica", 16, "bold"), bg="#f3c6dc").pack(fill="x", pady=10)
+    productos_cerdo = [("Costilla", 4500), ("Lomo de cerdo agridulce", 6800),("Arrollado de cerdo", 10000) ]
+
+    imagenes_cerdo = {
+        "Costilla": "costilladecerdo.jpg",
+        "Lomo de cerdo agridulce": "cerdagrid.jpg",
+        "Arrollado de cerdo": "lomo_de_cerdo.jpg",
+}
 
     for nombre, precio in productos_cerdo:
-        frame = tk.Frame(ventana, bg="#fce4b2")
-        frame.pack(anchor="w", padx=20, pady=5, fill="x")
+        frame = tk.Frame(ventana, bg="#fff9ed")
+        frame.pack(anchor="w", padx=0, pady=0, fill="x")
 
-        tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 12), bg="#fce4b2").pack(side="left")
+        rut_img= imagenes_cerdo.get(nombre,)
+        img = Image.open(rut_img)
+        img = img.resize((60, 60))
+        foto = ImageTk.PhotoImage(img)
+    
+        img_label = tk.Label(frame, image=foto, bg="#fce4b2")
+        img_label.image = foto 
+        img_label.pack(side="left", padx=0, pady=0)
+        
+        
+    
+        tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 11), bg="#fff9ed").pack(side="left", padx=10)
         
         tk.Button(frame, text="Agregar", 
                 command=lambda n=nombre, 
                 p=precio: agregar_al_pedido(n, p)
                 ).pack(side="right")
         
-    tk.Label(ventana, text="POLLO", font=("Helvetica", 16, "bold"), bg="#cf81a8").pack(fill="x", pady=10)
+    tk.Label(ventana, text="POLLO", font=("Helvetica", 16, "bold"), bg="#d5bbc8").pack(fill="x", pady=10)
     productos_pollo = [("Pollo a la moztaza", 4500), ("Pollo al verdeo", 7800), ("Pollo a la Parrilla", 7000),]  
     
+    imagenes_pollo = {
+        "Pollo a la moztaza": "pollo_a_la_mostaza.jpg",
+        "Pollo al verdeo": "pollo_al_verdeo.jpg",
+        "Pollo a la Parrilla": "pollo_a_la_parrilla.jpg",
+    }
+    
     for nombre, precio in productos_pollo:
-        frame = tk.Frame(ventana, bg="#fce4b2")
-        frame.pack(anchor="w", padx=20, pady=5, fill="x")
+        frame = tk.Frame(ventana, bg="#fff9ed")
+        frame.pack(anchor="w", padx=0, pady=0, fill="x")
+        
+        rut_img= imagenes_pollo.get(nombre,)
+        img = Image.open(rut_img)
+        img = img.resize((60, 60))
+        foto = ImageTk.PhotoImage(img)
+    
+        img_label = tk.Label(frame, image=foto, bg="#fce4b2")
+        img_label.image = foto 
+        img_label.pack(side="left", padx=0, pady=0)
 
-        tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 12), bg="#fce4b2").pack(side="left")
+        tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 12), bg="#fff9ed").pack(side="left")
         tk.Button(frame, text="Agregar", 
                 command=lambda n=nombre, 
                 p=precio: agregar_al_pedido(n, p)
@@ -135,6 +192,7 @@ def mostrar_pizzas():
     ventana.geometry("500x600")
     ventana.configure(bg="#d4c39b")
 
+
 tk.Button(ventana_principal, 
         text="PIZZAS", 
         width=20, 
@@ -147,7 +205,32 @@ def mostrar_empanadas():
     ventana = tk.Toplevel()
     ventana.title("Empanadas")
     ventana.geometry("500x600")
-    ventana.configure(bg="#d1ecf3")
+    ventana.configure(bg="#FA8072")  
+
+    tk.Label(
+        ventana,
+        text="EMPANADAS",
+        font=("Helvetica", 18, "bold"),
+        bg="",  
+        fg="black"
+    ).pack(fill="x", pady=10)
+
+    productos_empanadas = [
+        ("Jamon y Queso", 8000),
+        ("Pollo", 7500),
+        ("Carne picada", 7000),
+        ("Carne cortada a cuchillo", 7500),
+        ("Verduras", 6500),
+        ("Humitas", 7500)
+    ]
+
+    for nombre, precio in productos_empanadas:
+        frame = tk.Frame(ventana, bg="#FA8072")
+        frame.pack(anchor="w", padx=20, pady=5, fill="x")
+
+        tk.Label(frame, text=f"{nombre} - ${precio} c/d", font=("Arial", 12), bg="#FA8072").pack(side="left")
+        tk.Button(frame, text="Agregar", command=lambda n=nombre, p=precio: agregar_al_pedido(n, p)).pack(side="right")
+
 
 tk.Button(ventana_principal, 
         text="EMPANADAS", 
@@ -183,8 +266,6 @@ tk.Button(ventana_principal,
         height=2,
         command=mostrar_postres
         ).place(x=300, y=420)
-
-
 
 #################################### FUNCION PARA VER EL RESUMEN DEL PEDIDO ####################################
 def ver_resumen():
