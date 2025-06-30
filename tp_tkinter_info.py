@@ -11,7 +11,7 @@ from tkinter import ttk
 ventana_principal = tk.Tk()
 ventana_principal.title("Menú Principal")
 ventana_principal.geometry("500x600")
-ventana_principal.configure(bg="#7EEA89")
+ventana_principal.configure(bg="#C2B4A6")
 
 imagen=Image.open("cerveza.jpg")
 Imagen=imagen.resize((500,600))
@@ -27,11 +27,11 @@ def actualizar_reloj_y_fecha():
         fecha_label.config(text=fecha_actual)
         ventana_principal.after(1000, actualizar_reloj_y_fecha)
 
-reloj_label = tk.Label(ventana_principal, font=("Arial", 12, "bold"), bg="#9C7857", fg="black")
+reloj_label = tk.Label(ventana_principal, font=("Arial", 12, "bold"), bg="#D3BBA4", fg="black")
 reloj_label.place(x=407, y=40)
 
 
-fecha_label = tk.Label(ventana_principal, font=("Arial", 16), bg="#9C7857", fg="black")
+fecha_label = tk.Label(ventana_principal, font=("Arial", 16), bg="#D3BBA4", fg="black")
 fecha_label.place(x=365, y=10)
 
 actualizar_reloj_y_fecha()
@@ -40,13 +40,13 @@ actualizar_reloj_y_fecha()
         
 menu_princ=tk.Label(ventana_principal, 
         text="SELECCIONÁ UNA CATEGORÍA", 
-        font=("Arial", 14),bg="#886A55"
+        font=("Arial", 14),bg="#D3BBA4"
         )
 menu_princ.place(x=30, y=10)
 
 menu_princ=tk.Label(ventana_principal, 
         text="DE NUESTR MENÚ", 
-        font=("Arial", 14),bg="#886A55"
+        font=("Arial", 14),bg="#D3BBA4"
         )
 menu_princ.place(x=30, y=40)
 
@@ -242,13 +242,72 @@ def mostrar_pastas():
         ventana.title("Pastas")
         ventana.geometry("500x600")
         ventana.configure(bg="#d1ecf3")
+        
+        try:
+                imagen_fondo = Image.open("pasta.png")
+                imagen_fondo = imagen_fondo.resize(
+                (500, 600)
+                )  # redimenciona la imagen al contenedor
+                imagen_tk = ImageTk.PhotoImage(imagen_fondo)
+                ventana.imagen_fondo = imagen_tk  # Mantener referencia
+
+                fondo_label = tk.Label(ventana, image=imagen_tk)
+                fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
+                fondo_label.lower()
+        except Exception as e:
+                ventana.configure(bg="#FFFFFF")
+
+        titulo_frame = tk.Frame(ventana, bg="#FFA500", bd=0, highlightthickness=0)
+        titulo_frame.place(x=150, y=20, width=200, height=50)
+        tk.Label(
+                titulo_frame,
+                text="PASTAS",
+                font=("Tahoma", 30, "bold"),
+                fg="black",
+        ).pack(expand=True, fill="both")
+
+        pastas = [
+                ("Espaguetis", 8500.0),
+                ("Tallarines", 8500.0),
+                ("Fettuccine", 9500.0),
+                ("Vermicelli", 9500.0),
+                ("Ringuini", 10000.0),
+                ("Ravioles", 7500.0),
+                ("Canelones", 7500.0),
+                ("Sorrentinos", 7500.0),
+                ("Cappelletti", 6500.0),
+        ]
+
+        # Contenedor para los productos
+        y_pos = 90  # ubicacion inicial
+        for nombre, precio in pastas:
+                producto_frame = tk.Frame(ventana, bg="white", bd=1, relief="solid")
+                producto_frame.place(x=50, y=y_pos, width=400, height=35)
+
+                tk.Label(
+                producto_frame,
+                text=f"{nombre} \t ${precio} ",
+                font=("Consolas", 14),
+                bg="white",
+                fg="black",
+                ).pack(side="left", padx=10, pady=5)
+                tk.Button(
+                producto_frame,
+                text="Agregar",
+                bg="#00FFA6",
+                fg="black",
+                font=("Arial", 10, "bold"),
+                command=lambda n=nombre, p=precio: agregar_al_pedido(n, p),
+                ).pack(side="right", padx=2)
+
+                y_pos += 50  # ubicacion
 
 tk.Button(ventana_principal, 
         text="PASTAS", 
         width=20, 
         height=2,
         command=mostrar_pastas
-        ).place(x=50, y=180)
+        ).place(x=50, y=200)
 
 ######################## FUNCION DE SECCION COMBOS ########################
 def mostrar_combos():
@@ -312,7 +371,7 @@ tk.Button(ventana_principal,
         width=20, 
         height=2,
         command=mostrar_combos
-        ).place(x=300, y=180)
+        ).place(x=300, y=200)
 
 ########################FUNCION DE SECCION PIZZAS ########################
 
@@ -588,7 +647,7 @@ tk.Button(ventana_principal,
         width=20, 
         height=2,
         command=mostrar_bebidas
-        ).place(x=50, y=420)
+        ).place(x=50, y=400)
 
 ######################## FUNCION DE SECCION POSTRES ########################
 def mostrar_postres():
@@ -640,7 +699,7 @@ tk.Button(ventana_principal,
         width=20, 
         height=2,
         command=mostrar_postres
-        ).place(x=300, y=420)
+        ).place(x=300, y=400)
 
 #################################### FUNCION PARA VER EL RESUMEN DEL PEDIDO ####################################
 def ver_resumen():
