@@ -27,19 +27,16 @@ def actualizar_reloj_y_fecha():
         ventana_principal.after(1000, actualizar_reloj_y_fecha)
 
 reloj_label = tk.Label(ventana_principal, font=("Arial", 18, "bold"), bg="#7EEA89", fg="black")
-reloj_label.place(x=400, y=40)
-
+reloj_label.place(x=370, y=40)
 
 fecha_label = tk.Label(ventana_principal, font=("Arial", 12), bg="#7EEA89", fg="black")
-fecha_label.place(x=400, y=10)
+fecha_label.place(x=370, y=10)
 
 actualizar_reloj_y_fecha()
 
 
         
-menu_princ=tk.Label(ventana_principal, 
-        text="SELECCIONÁ UNA CATEGORÍA DE NUESTRO", 
-        font=("Arial", 14),bg="#886A55"
+menu_princ = tk.Label( ventana_principal, text="SELECCIONÁ UNA CATEGORÍA DE NUESTRO", font=("Arial", 14, "bold"), bg="#7EEA89", fg="#1b1b1b"
         )
 menu_princ.pack(pady=10)
 
