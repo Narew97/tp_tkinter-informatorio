@@ -219,13 +219,7 @@ def mostrar_hamburguesas():
                 tk.Label(frame, text=f"{nombre} - ${precio}", font=("Arial", 10), bg="#fce4b2").pack(side="left")
                 tk.Button(frame, text="Agregar", command=lambda n=nombre, p=precio: agregar_al_pedido(n, p)).pack(side="right")
 
-        tk.Button(ventana_principal, text="HAMBURGUESAS", width=20, height=2, command=mostrar_hamburguesas).place(x=300, y=60)
 
-def mostrar_pastas():
-        ventana = tk.Toplevel()
-        ventana.title("Pastas")
-        ventana.geometry("500x600")
-        ventana.configure(bg="#d1ecf3")
 
 
 tk.Button(ventana_principal, 
